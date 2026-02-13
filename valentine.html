@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 A Special Question for Karabo 💕</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #FFD700 0%, #FFCC00 50%, #B8860B 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        /* Hide scrollbars for all elements */
+        * {
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE/Edge */
+        }
+
+        *::-webkit-scrollbar {
+            display: none;
+            /* Chrome/Safari/Webkit */
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(47, 47, 47, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 2px solid #FFD700;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hearts {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(255, 107, 157, 0.5);
+        }
+
+        .name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #FFD700, #000000, #FFD700);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s linear infinite;
+            margin-bottom: 30px;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .question {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(45deg, #FFD700, #B8860B);
+            color: #2F2F2F;
+            box-shadow: 0 10px 30px rgba(218, 165, 32, 0.4);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(218, 165, 32, 0.6);
+        }
+
+        .btn-no {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-no:hover {
+            transform: scale(0.9);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Fireworks */
+        .fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            display: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* Sad Screen */
+        .sad-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2F2F2F 0%, #000000 100%);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .sad-screen img {
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+
+        .sad-screen h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sad-screen p {
+            color: #888;
+            font-size: 1.2rem;
+        }
+
+        .try-again-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, #ff6b9d, #ff8e53);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .try-again-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Floating Hearts Background */
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatUp 8s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.3;
+            }
+
+            90% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Rain effect for sad screen */
+        .rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(transparent, #6b8cce);
+            animation: rain 1s linear infinite;
+        }
+
+        @keyframes rain {
+            0% {
+                transform: translateY(-100vh);
+            }
+
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Image Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+            width: fit-content;
+            max-width: 95vw;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .gallery img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid #FFD700;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: imageEntrance 0.6s ease forwards;
+        }
+
+        @keyframes imageEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .gallery img:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .gallery img:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .gallery img:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .gallery img:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .gallery img:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .gallery img:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .gallery img:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+
+        .gallery img:nth-child(8) {
+            animation-delay: 0.8s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.15) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+            border-color: #FFED4E;
+            z-index: 10;
+        }
+
+        .success-content {
+            display: grid;
+            place-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: transparent;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 200;
+            background: linear-gradient(135deg, #FFD700 0%, #FFCC00 50%, #B8860B 100%);
+            display: none;
+            /* Controlled by flex in JS */
+            align-items: center;
+            justify-content: center;
+            animation: zoomIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+        }
+
+        .big-hearts {
+            font-size: 3rem;
+            margin-bottom: 5px;
+            animation: heartbeat 0.8s ease infinite;
+        }
+
+        .success-content h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: none;
+            color: #000000;
+        }
+
+        .success-content p {
+            text-shadow: none;
+            margin: 5px 0;
+            color: #000000;
+        }
+
+        .success-content h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #000000;
+            margin: 10px 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            body {
+                min-height: 100vh;
+                padding: 10px;
+            }
+
+            .container {
+                padding: 25px 20px;
+                border-radius: 20px;
+                margin: 10px;
+            }
+
+            .hearts {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .name {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+
+            .question {
+                font-size: 1.2rem;
+                margin-bottom: 25px;
+            }
+
+            .buttons {
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 12px 35px;
+                font-size: 1rem;
+                letter-spacing: 1px;
+            }
+
+            /* Success Screen Mobile */
+            .success-message {
+                overflow-y: auto;
+            }
+
+            .success-content {
+                padding: 15px 10px;
+                height: auto;
+                min-height: 100%;
+            }
+
+            .big-hearts {
+                font-size: 2rem;
+            }
+
+            .success-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .success-content p {
+                font-size: 0.9rem;
+            }
+
+            .success-content h2 {
+                font-size: 1.5rem;
+                margin: 8px 0;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-top: 8px;
+            }
+
+            .gallery img {
+                width: 150px;
+                height: 150px;
+                border-radius: 10px;
+                border-width: 2px;
+            }
+
+            /* Sad Screen Mobile */
+            .sad-screen {
+                padding: 15px;
+            }
+
+            .sad-screen img {
+                max-width: 250px;
+                margin-bottom: 20px;
+            }
+
+            .sad-screen h2 {
+                font-size: 1.4rem;
+            }
+
+            .try-again-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            .gallery {
+                gap: 8px;
+            }
+
+            .gallery img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .question {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Main Container -->
+    <div class="container" id="mainContainer">
+        <div class="hearts">🐝💖🐝</div>
+        <h1 style="color: #FFD700;">Hey Bumblebee 🐝</h1>
+        <p class="name">Karabo my love!</p>
+        <p class="question">Will you do me the honor of being my Valentines? 💝</p>
+        <div class="buttons">
+            <button class="btn btn-yes" onclick="sayYes()">Yes! 💕</button>
+            <button class="btn btn-no" onclick="sayNo()">No 😢</button>
+        </div>
+    </div>
+
+    <!-- Fireworks Container -->
+    <div class="fireworks-container" id="fireworks"></div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <div class="success-content">
+            <div class="big-hearts">🐝💖🐝💖🐝</div>
+            <h1>Yaaay! 🎉</h1>
+            <p style="font-size: 1.5rem; color: #000000; font-family: 'Dancing Script', cursive;">
+                You are the best!♥️
+            </p>
+            <p>You just made me the happiest man in the world ! 🥰</p>
+            <h2>Blue ♥️ & Red ♥️</h2>
+            <div class="gallery">
+                <img src="Images/WhatsApp Image 2026-02-13 at 22.24.31.jpeg" alt="Memory 1">
+                <img src="Images/WhatsApp Image 2026-02-13 at 22.25.42.jpeg" alt="Memory 2">
+                <img src="Images/WhatsApp Image 2026-02-13 at 22.25.59.jpeg" alt="Memory 3">
+                <img src="Images/WhatsApp Image 2026-02-13 at 22.26.28.jpeg" alt="Memory 4">
+                <img src="Images/WhatsApp Image 2026-02-13 at 22.26.54.jpeg" alt="Memory 5">
+                <img src="Images/WhatsApp Image 2026-02-13 at 22.27.23.jpeg" alt="Memory 6">
+                <img src="Images/WhatsApp Image 2026-02-13 at 22.29.46 (1).jpeg" alt="Memory 7">
+                <img src="Images/WhatsApp Image 2026-02-13 at 22.29.46.jpeg" alt="Memory 8">
+            </div>
+        </div>
+    </div>
+
+    <!-- Sad Screen -->
+    <div class="sad-screen" id="sadScreen">
+        <div class="rain" id="rain"></div>
+        <img src="Images/WhatsApp Image 2026-02-13 at 23.05.51.jpeg" alt="Please say yes">
+        <h2>Please make me the happiest man in the world.</h2>
+        <button class="try-again-btn" onclick="tryAgain()">Please 🥺</button>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const items = ['💕', '💖', '🐝', '🍯', '💝', '❤️', '🐝'];
+
+            for (let i = 0; i < 25; i++) {
+                const item = document.createElement('span');
+                item.className = 'floating-heart';
+                item.textContent = items[Math.floor(Math.random() * items.length)];
+                item.style.left = Math.random() * 100 + '%';
+                item.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                item.style.animationDelay = Math.random() * 5 + 's';
+                item.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                container.appendChild(item);
+            }
+        }
+
+        // Create firework explosion
+        function createFirework(x, y) {
+            const container = document.getElementById('fireworks');
+            const colors = ['#FFD700', '#DAA520', '#000000', '#FFCC00', '#B8860B', '#FFD700'];
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                const angle = (Math.PI * 2 * i) / 30;
+                const velocity = 100 + Math.random() * 100;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+
+                container.appendChild(particle);
+
+                setTimeout(() => particle.remove(), 1500);
+            }
+        }
+
+        // Launch fireworks
+        function launchFireworks() {
+            const container = document.getElementById('fireworks');
+            container.style.display = 'block';
+
+            // Create multiple fireworks at random positions
+            function randomFirework() {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight * 0.7;
+                createFirework(x, y);
+            }
+
+            // Initial burst
+            for (let i = 0; i < 5; i++) {
+                setTimeout(randomFirework, i * 200);
+            }
+
+            // Continuous fireworks
+            const interval = setInterval(randomFirework, 300);
+
+            // Keep fireworks going
+            setTimeout(() => {
+                // Slow down after 5 seconds
+                clearInterval(interval);
+                setInterval(randomFirework, 800);
+            }, 5000);
+        }
+
+        // Create rain effect
+        function createRain() {
+            const container = document.getElementById('rain');
+            container.style.display = 'block';
+
+            for (let i = 0; i < 100; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'raindrop';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(drop);
+            }
+        }
+
+        // Yes button clicked
+        function sayYes() {
+            document.getElementById('mainContainer').style.display = 'none';
+            const success = document.getElementById('successMessage');
+            success.style.display = 'flex';
+            launchFireworks();
+
+            // Add more floating items with emphasis on honey pots and bees
+            const container = document.getElementById('floatingHearts');
+            for (let i = 0; i < 60; i++) {
+                const item = document.createElement('span');
+                item.className = 'floating-heart';
+                item.textContent = ['💕', '💖', '🐝', '🍯', '🍯', '🐝', '💝', '🍯'][Math.floor(Math.random() * 8)];
+                item.style.left = Math.random() * 100 + '%';
+                item.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                item.style.animationDelay = Math.random() * 2 + 's';
+                item.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+                item.style.opacity = '0.7';
+                container.appendChild(item);
+            }
+        }
+
+        // No button clicked
+        function sayNo() {
+            document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('floatingHearts').style.display = 'none';
+            document.getElementById('sadScreen').style.display = 'flex';
+            createRain();
+        }
+
+        // Try again button
+        function tryAgain() {
+            document.getElementById('sadScreen').style.display = 'none';
+            document.getElementById('rain').innerHTML = '';
+            document.getElementById('rain').style.display = 'none';
+            document.getElementById('floatingHearts').style.display = 'block';
+            document.getElementById('mainContainer').style.display = 'block';
+        }
+
+        // Initialize
+        createFloatingHearts();
+    </script>
+</body>
+
+</html>
